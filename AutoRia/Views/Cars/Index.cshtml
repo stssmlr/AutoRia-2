@@ -1,0 +1,110 @@
+﻿@model List<CarDto>
+
+<div class="container">
+
+<h1>Cars List</h1>
+<p>You can manage Cars here</p>
+
+    <div class="text-start">
+        <a asp-action="Create" class="btn btn-primary mb-3">
+            <i class="bi bi-plus-lg"></i>
+            Add New Car
+        </a>
+    </div>
+
+
+    <table class="table admin-product-table">
+        <thead>
+            <tr class="table-dark">
+                <th scope="col">#</th>
+                <th scope="col" class="text-center">Image</th>
+                <th scope="col">Mark</th>
+                <th scope="col">Model</th>
+                <th scope="col">Mileage</th>
+                <th scope="col">Type Of Fuel</th>
+                <th scope="col">Year</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr class="align-middle">
+                    <th scope="row">@i.Id</th>
+                    <th class="text-center" scope="row">
+                        <img height="50" src="@i.ImageUrl" alt="@i.Mark" />
+                    </th>
+                    <td>
+                        @i.Mark
+                        @if (i.Discount > 0)
+                        {
+                            <span class="badge bg-primary">SALE</span>
+                        }
+                    </td> 
+                    <td>
+                        @i.Model
+                    </td>
+                    <td>
+                        @i.Mileage
+                    </td>
+                    <td>
+                        @i.FuelTypeName
+                    </td>
+                    <td>
+                        @i.Year
+                    </td>
+                    <td>
+                        @i.CategoryName
+                    </td>
+                    <td>
+                        @if (i.Discount > 0)
+                        {
+                            <span>@(i.Price - i.Price / 100 * i.Discount)$</span>
+                            <del>@i.Price</del>
+                        }
+                        else
+                        {
+                            <span>@i.Price$</span>
+                        }
+                    </td>
+                    <td>
+                        @(i.Discount > 0 ? i.Discount + "%" : "-")
+                    </td>
+                    <td>
+                        @if (i.Quantity > 0)
+                        {
+                            <span class="badge bg-success">In Stock</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Out of Stock</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-controller="Cars" asp-action="Edit" asp-route-id="@i.Id" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <a asp-controller="Cars" asp-action="ArchiveItem" asp-route-id="@i.Id" class="btn btn-outline-warning">
+                            <i class="bi bi-archive-fill"></i>
+                        </a>
+                        
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+<p>Count : @Model.Count</p>
+
+<div>
+    <a asp-action="Archive" class="btn btn-secondary">
+        <i class="bi bi-archive-fill"></i>
+        <span>Show Archived Items</span>
+    </a>
+</div> 
+</div>

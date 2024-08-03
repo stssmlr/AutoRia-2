@@ -1,0 +1,20 @@
+﻿@model Car
+
+<div class="col">
+    <div class="card h-100">
+        <img height="130" src="@Model.ImageUrl" class="card-img-top" alt="@Model.Mark">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Mark @Model.Model</h5>
+            <p class="card-text">
+                Year: @Model.Year<br />
+                Mileage: @Model.Mileage
+            </p>
+            <button type="button" class="btn btn-primary">Contact Seller</button>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">
+                Price: <span class="badge bg-success">@Model.Price$</span>
+            </small>
+        </div>
+    </div>
+</div>
