@@ -20,6 +20,8 @@ namespace AutoRia.Controllers
 
         public IActionResult Index()
         {
+            
+
             var cars = context.Cars
                 .Include(x => x.Category)
                 .ToList();

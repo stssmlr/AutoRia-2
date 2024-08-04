@@ -9,7 +9,7 @@
                 Year: @Model.Year<br />
                 Mileage: @Model.Mileage
             </p>
-            <button type="button" class="btn btn-primary">Contact Seller</button>
+            <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add To Favourite</a>
         </div>
         <div class="card-footer">
             <small class="text-muted">
