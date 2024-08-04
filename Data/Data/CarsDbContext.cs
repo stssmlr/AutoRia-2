@@ -11,11 +11,14 @@ namespace Data.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<FuelType> FuelType { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public CarsDbContext() { }
+        public CarsDbContext(DbContextOptions options) : base(options) { }
+
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=AutoRia;Integrated Security=True;");
-        }
+        }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

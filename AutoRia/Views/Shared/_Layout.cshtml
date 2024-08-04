@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject CartService cartService;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -36,7 +38,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">
                                     <i class="bi bi-bookmark-heart"></i>
-                                    Liked(0)
+                                    Cart (@cartService.GetCount())
                                     </a>
                             </li>
                         </ul>

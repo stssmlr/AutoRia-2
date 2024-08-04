@@ -4,18 +4,20 @@ using Core.Dtos;
 using Data.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AutoRia.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutoRia.Controllers
 {
     public class CartController : Controller
     {
-        private CarsDbContext context = new();
+        private readonly CarsDbContext context;
         private readonly IMapper mapper;
 
-        public CartController(IMapper mapper)
+        public CartController(IMapper mapper, CarsDbContext context)
         {
             this.mapper = mapper;
+            this.context = context;
         }
 
         public IActionResult Index()

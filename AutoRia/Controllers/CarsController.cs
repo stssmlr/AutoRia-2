@@ -10,11 +10,14 @@ namespace AutoRia.Controllers
 {
     public class CarsController : Controller
     {
-        private CarsDbContext ctx = new CarsDbContext();
+
         private readonly IMapper mapper;
-        public CarsController(IMapper mapper)
+        private readonly CarsDbContext ctx;
+        public CarsController(IMapper mapper, CarsDbContext ctx)
         {
             this.mapper = mapper;
+            this.ctx = ctx;
+
         }
 
         // -+-+-+-+-+-+-+-+-+-+-+-+- INDEX -+-+-+-+-+-+-+-+-+-+-+-+-

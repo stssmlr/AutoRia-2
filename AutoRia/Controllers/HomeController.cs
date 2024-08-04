@@ -11,11 +11,11 @@ namespace AutoRia.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private CarsDbContext context = new CarsDbContext();
-        public HomeController(ILogger<HomeController> logger)
+        private readonly CarsDbContext context;
+
+        public HomeController(CarsDbContext context)
         {
-            _logger = logger;
+            this.context = context;
         }
 
         public IActionResult Index()
