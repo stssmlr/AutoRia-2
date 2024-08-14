@@ -11,6 +11,7 @@ namespace Data.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<FuelType> FuelType { get; set; }
+        public DbSet<Request> Requests { get; set; }
 
         public CarsDbContext() { }
         public CarsDbContext(DbContextOptions options) : base(options) { }

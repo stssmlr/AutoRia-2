@@ -6,6 +6,9 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Data.Entities;
+using Core.Interfaces;
+using Core.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +20,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<CarsDbContext>(options =>
     options.UseSqlServer(connectionString)
 );
-
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarsDbContext>();
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarsDbContext>();
 
@@ -40,7 +41,9 @@ builder.Services.AddSession(options =>
 });
 
 // ------ configure custom services
-builder.Services.AddScoped<CartService>();
+builder.Services.AddScoped<ICartService, CartService>();
+
+builder.Services.AddScoped<IRequestService, RequestService>();
 
 var app = builder.Build();
 

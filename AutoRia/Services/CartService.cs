@@ -5,9 +5,13 @@ using Data.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+using Data.Entities;
+using Core.Interfaces;
+
+
 namespace AutoRia.Services
 {
-    public class CartService
+    public class CartService : ICartService
     {
         private readonly HttpContext httpContext;
         private readonly IMapper mapper;
@@ -22,21 +26,29 @@ namespace AutoRia.Services
 
         public int GetCount()
         {
-            var ids = httpContext.Session.Get<List<int>>("liked_items");
+            var ids = httpContext.Session.Get<List<int>>("cart_items");
 
             if (ids == null) return 0;
 
             return ids.Distinct().Count();
         }
 
-        public List<CarDto> GetProducts()
+        public List<CarDto> GetCars()
         {
             var ids = httpContext.Session.Get<List<int>>("cart_items") ?? new();
 
-            var products = context.Cars.Include(x => x.Category).Where(x => ids.Contains(x.Id)).ToList();
+            var cars = context.Cars.Include(x => x.Category).Where(x => ids.Contains(x.Id)).ToList();
 
-            return mapper.Map<List<CarDto>>(products);
+            return mapper.Map<List<CarDto>>(cars);
         }
+
+        public List<Car> GetCarsEntity()
+        {
+            var ids = httpContext.Session.Get<List<int>>("cart_items") ?? new();
+
+            return context.Cars.Include(x => x.Category).Where(x => ids.Contains(x.Id)).ToList();
+        }
+
 
         public void AddItem(int id)
         {
@@ -58,6 +70,11 @@ namespace AutoRia.Services
             ids.Remove(id);
 
             httpContext.Session.Set("cart_items", ids);
+        }
+
+        public void Clear()
+        {
+            httpContext.Session.Remove("cart_items");
         }
     }
 }

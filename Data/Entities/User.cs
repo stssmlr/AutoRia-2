@@ -10,8 +10,7 @@ namespace Data.Entities
 {
     public class User : IdentityUser
     {
-
         public DateTime? Birthdate { get; set; }
-
+        public ICollection<Request>? Requests { get; set; }
     }
 }

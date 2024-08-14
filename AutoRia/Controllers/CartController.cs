@@ -6,21 +6,22 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoRia.Services;
 using Microsoft.EntityFrameworkCore;
+using Core.Interfaces;
 
 namespace AutoRia.Controllers
 {
     public class CartController : Controller
     {
-        private readonly CartService cartService;
+        private readonly ICartService cartService;
 
-        public CartController(CartService cartService)
+        public CartController(ICartService cartService)
         {
              this.cartService = cartService;
         }
 
         public IActionResult Index()
         {
-            return View(cartService.GetProducts());
+            return View(cartService.GetCars());
         }
 
         public IActionResult Add(int id, string? returnUrl)

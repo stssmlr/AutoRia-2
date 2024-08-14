@@ -9,6 +9,10 @@ namespace Core.MapperProfiles
         public AppProfile()
         {
             CreateMap<CarDto, Car>().ReverseMap();
+
+            CreateMap<Request, RequestDto>()
+                .ForMember(x => x.UserName, opt => opt.MapFrom(src => src.User.UserName));
+                
         }
     }
 }
