@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Data.Data
 {
-    public class CarsDbContext : DbContext
+    public class CarsDbContext : IdentityDbContext<User>
     {
         public DbSet<Car> Cars { get; set; }
         public DbSet<Category> Category { get; set; }

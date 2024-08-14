@@ -156,6 +156,17 @@ namespace AutoRia.Controllers
             return RedirectToAction("Index");
         }
 
+        // -+-+-+-+-+-+-+-+-+-+-+-+- DEATILS -+-+-+-+-+-+-+-+-+-+-+-+-
+
+        public IActionResult Details(int id)
+        {
+            var product = ctx.Cars.Find(id);
+
+            if (product == null) return NotFound();
+
+            return View(mapper.Map<CarDto>(product));
+        }
+
         // -+-+-+-+-+-+-+-+-+-+-+-+- FUNCTIONS -+-+-+-+-+-+-+-+-+-+-+-+-
         private void LoadCategories()
         {
