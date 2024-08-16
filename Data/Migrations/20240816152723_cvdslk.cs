@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Add : Migration
+    public partial class cvdslk : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -186,6 +186,26 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Requests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Requests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cars",
                 columns: table => new
                 {
@@ -202,7 +222,8 @@ namespace Data.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Archived = table.Column<bool>(type: "bit", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RequestId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -219,6 +240,11 @@ namespace Data.Migrations
                         principalTable: "FuelType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cars_Requests_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "Requests",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -249,13 +275,13 @@ namespace Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cars",
-                columns: new[] { "Id", "Archived", "CategoryId", "Description", "Discount", "FuelTypeId", "ImageUrl", "Mark", "Mileage", "Model", "Price", "Quantity", "Year" },
+                columns: new[] { "Id", "Archived", "CategoryId", "Description", "Discount", "FuelTypeId", "ImageUrl", "Mark", "Mileage", "Model", "Price", "Quantity", "RequestId", "Year" },
                 values: new object[,]
                 {
-                    { 1, false, 2, null, 5, 2, "https://nextcar.ua/images/blog/484/audi-a8-2022__9_.jpg", "Audi", 390000, "A8", 19899m, 2, 2018 },
-                    { 2, false, 1, null, 0, 3, "https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/GLS/9791/1704772236530/front-left-side-47.jpg", "Mercedes-Benz", 110000, "GLS", 29999m, 3, 2019 },
-                    { 3, false, 1, null, 0, 1, "https://media.ed.edmunds-media.com/bmw/x5/2025/oem/2025_bmw_x5_4dr-suv_xdrive40i_fq_oem_1_600.jpg", "BMW", 220000, "X5", 14999m, 1, 2014 },
-                    { 4, false, 7, null, 0, 5, "https://images.prismic.io/carwow/2b4b884f-fa2b-40e2-9182-2d2c9450ac5b_37018-ThenewVolkswagenGolfeHybrid.jpg?auto=format&cs=tinysrgb&fit=crop&q=60&w=750", "Volkswagen", 91000, "Golf", 12999m, 6, 2015 }
+                    { 1, false, 2, null, 5, 2, "https://nextcar.ua/images/blog/484/audi-a8-2022__9_.jpg", "Audi", 390000, "A8", 19899m, 2, null, 2018 },
+                    { 2, false, 1, null, 0, 3, "https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/GLS/9791/1704772236530/front-left-side-47.jpg", "Mercedes-Benz", 110000, "GLS", 29999m, 3, null, 2019 },
+                    { 3, false, 1, null, 0, 1, "https://media.ed.edmunds-media.com/bmw/x5/2025/oem/2025_bmw_x5_4dr-suv_xdrive40i_fq_oem_1_600.jpg", "BMW", 220000, "X5", 14999m, 1, null, 2014 },
+                    { 4, false, 7, null, 0, 5, "https://images.prismic.io/carwow/2b4b884f-fa2b-40e2-9182-2d2c9450ac5b_37018-ThenewVolkswagenGolfeHybrid.jpg?auto=format&cs=tinysrgb&fit=crop&q=60&w=750", "Volkswagen", 91000, "Golf", 12999m, 6, null, 2015 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -306,6 +332,16 @@ namespace Data.Migrations
                 name: "IX_Cars_FuelTypeId",
                 table: "Cars",
                 column: "FuelTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_RequestId",
+                table: "Cars",
+                column: "RequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_UserId",
+                table: "Requests",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -333,13 +369,16 @@ namespace Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropTable(
                 name: "FuelType");
+
+            migrationBuilder.DropTable(
+                name: "Requests");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

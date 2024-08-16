@@ -5,12 +5,14 @@ using Data.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AutoMapper;
 using Core.Dtos;
+using Microsoft.AspNetCore.Authorization;
+using AutoRia.SeedExtensions;
 
 namespace AutoRia.Controllers
 {
+    [Authorize(Roles = Roles.ADMIN)]
     public class CarsController : Controller
     {
-
         private readonly IMapper mapper;
         private readonly CarsDbContext ctx;
         public CarsController(IMapper mapper, CarsDbContext ctx)
@@ -157,7 +159,7 @@ namespace AutoRia.Controllers
         }
 
         // -+-+-+-+-+-+-+-+-+-+-+-+- DEATILS -+-+-+-+-+-+-+-+-+-+-+-+-
-
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var product = ctx.Cars.Find(id);

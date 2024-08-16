@@ -23,15 +23,15 @@ namespace Core.Services
         }
         public void Create(string userId)
         {
-            // create order
-            var newOrder = new Request()
+            // create request
+            var newRequest = new Request()
             {
                 CreatedAt = DateTime.Now,
                 Cars = cartService.GetCarsEntity(),
                 UserId = userId
             };
 
-            context.Requests.Add(newOrder);
+            context.Requests.Add(newRequest);
             context.SaveChanges();
 
             cartService.Clear();

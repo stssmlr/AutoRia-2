@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Data.Entities;
 using Core.Interfaces;
 using Core.Services;
+using AutoRia.SeedExtensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,12 +17,17 @@ string? connectionString = builder.Configuration.GetConnectionString("LocalDb");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<CarsDbContext>(options =>
     options.UseSqlServer(connectionString)
 );
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarsDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+    options.SignIn.RequireConfirmedAccount = false)
+    .AddDefaultTokenProviders()
+    .AddDefaultUI()
+    .AddEntityFrameworkStores<CarsDbContext>();
 
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
@@ -46,6 +52,13 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IRequestService, RequestService>();
 
 var app = builder.Build();
+
+// -------------- Seed Initial Data
+using (var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.SeedRoles().Wait();
+    scope.ServiceProvider.SeedAdmin().Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

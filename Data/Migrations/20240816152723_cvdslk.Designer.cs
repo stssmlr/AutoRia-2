@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(CarsDbContext))]
-    [Migration("20240814155358_Reset")]
-    partial class Reset
+    [Migration("20240816152723_cvdslk")]
+    partial class cvdslk
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,9 @@ namespace Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RequestId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
@@ -76,6 +79,8 @@ namespace Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("FuelTypeId");
+
+                    b.HasIndex("RequestId");
 
                     b.ToTable("Cars");
 
@@ -238,6 +243,28 @@ namespace Data.Migrations
                             Id = 5,
                             Name = "Hybrid"
                         });
+                });
+
+            modelBuilder.Entity("Data.Entities.Request", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("Data.Entities.User", b =>
@@ -459,9 +486,24 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Data.Entities.Request", null)
+                        .WithMany("Cars")
+                        .HasForeignKey("RequestId");
+
                     b.Navigation("Category");
 
                     b.Navigation("FuelType");
+                });
+
+            modelBuilder.Entity("Data.Entities.Request", b =>
+                {
+                    b.HasOne("Data.Entities.User", "User")
+                        .WithMany("Requests")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -523,6 +565,16 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.FuelType", b =>
                 {
                     b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("Data.Entities.Request", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("Data.Entities.User", b =>
+                {
+                    b.Navigation("Requests");
                 });
 #pragma warning restore 612, 618
         }

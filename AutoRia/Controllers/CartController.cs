@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using AutoRia.Services;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace AutoRia.Controllers
 {
     public class CartController : Controller
     {
         private readonly ICartService cartService;
+        private readonly RoleManager<IdentityRole> userManager;
 
         public CartController(ICartService cartService)
         {
              this.cartService = cartService;
+             this.userManager = userManager;
         }
 
         public IActionResult Index()

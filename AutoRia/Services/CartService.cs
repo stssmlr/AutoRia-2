@@ -42,12 +42,28 @@ namespace AutoRia.Services
             return mapper.Map<List<CarDto>>(cars);
         }
 
+        public CarDto GetCar(int carId)
+        {
+            var car = context.Cars
+                .Include(x => x.Category)
+                .FirstOrDefault(x => x.Id == carId);
+
+            return mapper.Map<CarDto>(car);
+        }
+
         public List<Car> GetCarsEntity()
         {
             var ids = httpContext.Session.Get<List<int>>("cart_items") ?? new();
 
             return context.Cars.Include(x => x.Category).Where(x => ids.Contains(x.Id)).ToList();
         }
+
+       /* public Car GetCarEntity(int carId)
+        {
+            return context.Cars
+                .Include(x => x.Category)
+                .FirstOrDefault(x => x.Id == carId);
+        }*/
 
 
         public void AddItem(int id)

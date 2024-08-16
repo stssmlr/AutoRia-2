@@ -10,6 +10,8 @@ namespace Core.Interfaces
         void RemoveItem(int id);
         List<CarDto> GetCars();
         List<Car> GetCarsEntity();
+        /*CarDto GetCar();
+        Car GetCarEntity();*/
         void Clear();
     }
 }
