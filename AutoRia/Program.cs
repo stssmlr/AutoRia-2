@@ -13,7 +13,7 @@ using AutoRia.SeedExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string? connectionString = builder.Configuration.GetConnectionString("LocalDb");
+string? connectionString = builder.Configuration.GetConnectionString("Somee");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
