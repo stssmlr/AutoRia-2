@@ -13,7 +13,7 @@ using AutoRia.SeedExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string? connectionString = builder.Configuration.GetConnectionString("Somee");
+string? connectionString = builder.Configuration.GetConnectionString("LocalDb");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -48,8 +48,8 @@ builder.Services.AddSession(options =>
 
 // ------ configure custom services
 builder.Services.AddScoped<ICartService, CartService>();
-
 builder.Services.AddScoped<IRequestService, RequestService>();
+builder.Services.AddScoped<IFilesService, FilesService>();
 
 var app = builder.Build();
 

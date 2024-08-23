@@ -29,7 +29,6 @@ namespace Core.Validations
             RuleFor(x => x.FuelTypeId).GreaterThan(0);
             RuleFor(x => x.Description)
                 .MaximumLength(100);
-            RuleFor(x => x.ImageUrl).Must(LinkMustBeAUri).WithMessage("Inage url address must be valid.");
         }
 
         private static bool LinkMustBeAUri(string? link)

@@ -6,12 +6,23 @@
 
 <h1>@(create ? "Add" : "Edit") Car Form</h1>
 
-
-<form class="row g-3" method="post" asp-action="@(create ? "Create" : "Edit")">
-    <div class="col-6">
+@if (!create)
+{
+    <div class="text-center">
+        <img height="150" class="rounded-2" src="@Model?.ImageUrl" />
+    </div>
+}
+<form class="row g-3" method="post" enctype="multipart/form-data" asp-action="@(create ? "Create" : "Edit")">
+    @* <div class="col-6">
         <label asp-for=ImageUrl class="form-label">Image URL</label>
         <input asp-for=ImageUrl required type="url" class="form-control" placeholder="Enter product image address">
         <span class="small text-danger" asp-validation-for="ImageUrl"></span>
+    </div> *@
+    <input hidden asp-for=ImageUrl />
+    <div class="col-6">
+        <label asp-for=Image class="form-label">Image</label>
+        <input asp-for=Image class="form-control" type="file" id="formFile">
+        <span class="small text-danger" asp-validation-for="Image"></span>
     </div>
     <div class="col-6">
         <label asp-for=Mark class="form-label">Mark</label>

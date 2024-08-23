@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using AutoRia.SeedExtensions;
+using Core.Interfaces;
 
 namespace AutoRia.Controllers
 {
@@ -15,11 +16,13 @@ namespace AutoRia.Controllers
     {
         private readonly IMapper mapper;
         private readonly CarsDbContext ctx;
-        public CarsController(IMapper mapper, CarsDbContext ctx)
+        private readonly IFilesService filesService;
+
+        public CarsController(IMapper mapper, CarsDbContext ctx, IFilesService filesService)
         {
             this.mapper = mapper;
             this.ctx = ctx;
-
+            this.filesService = filesService;
         }
 
         // -+-+-+-+-+-+-+-+-+-+-+-+- INDEX -+-+-+-+-+-+-+-+-+-+-+-+-
@@ -58,11 +61,15 @@ namespace AutoRia.Controllers
         }
 
         // -+-+-+-+-+-+-+-+-+-+-+-+- DELETE -+-+-+-+-+-+-+-+-+-+-+-+-
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var car = ctx.Cars.Find(id);
 
             if (car == null) return NotFound();
+
+            //delete image
+            if (car.ImageUrl != null)
+                await filesService.DeleteCarImage(car.ImageUrl);
 
             ctx.Cars.Remove(car);
             ctx.SaveChanges();
@@ -94,7 +101,7 @@ namespace AutoRia.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CarDto car)
+        public async Task<IActionResult> Create(CarDto car)
         {
             // TODO: add data validation
             if (!ModelState.IsValid)
@@ -105,20 +112,9 @@ namespace AutoRia.Controllers
                 return View("Upsert", car);
             }
 
-            // 1 - manual mapping
-            //var entity = new Product
-            //{
-            //    Name = model.Name,
-            //    Archived = model.Archived,
-            //    CategoryId = model.CategoryId,
-            //    Description = model.Description,
-            //    Discount = model.Discount,
-            //    ImageUrl = model.ImageUrl,
-            //    Price = model.Price,
-            //    Quantity = model.Quantity
-            //};
-            // 2 - using Auto Mapper
             var entity = mapper.Map<Car>(car);
+
+            entity.ImageUrl = await filesService.SaveCarImage(car.Image);
 
             ctx.Cars.Add(entity);
             ctx.SaveChanges();
@@ -141,7 +137,7 @@ namespace AutoRia.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(CarDto car)
+        public async Task<IActionResult> Edit(CarDto car)
         {
             // TODO: add data validation
             if (!ModelState.IsValid)
@@ -150,6 +146,11 @@ namespace AutoRia.Controllers
                 LoadTypesOfFuel();
                 LoadCategories();
                 return View("Upsert", car);
+            }
+
+            if (car.Image != null)
+            {
+                car.ImageUrl = await filesService.EditCarImage(car.ImageUrl, car.Image);
             }
 
             ctx.Cars.Update(mapper.Map<Car>(car));

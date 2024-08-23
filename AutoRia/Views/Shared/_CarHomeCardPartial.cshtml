@@ -8,7 +8,8 @@
                 <a asp-controller="Cars" asp-action="Details" asp-route-id="@Model.Id">@Model.Mark @Model.Model</a>
             </h5>
             <p class="card-text">
-                Year: @Model.Year<br />
+                Year: @Model.Year<br/>
+                Year: @Model.Year<br/>
                 Mileage: @Model.Mileage
             </p>
             <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Favourite</a>
