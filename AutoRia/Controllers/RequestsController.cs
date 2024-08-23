@@ -15,6 +15,7 @@ namespace AutoRia.Controllers
     {
         private readonly IRequestService requestService;
         private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        private string UserEmail => User.FindFirstValue(ClaimTypes.Email)!;
 
         public RequestsController(IRequestService requestService)
         {
@@ -29,7 +30,7 @@ namespace AutoRia.Controllers
         public IActionResult Create()
         {
             // create request
-            requestService.Create(UserId);
+            requestService.Create(UserId, UserEmail);
 
             return RedirectToAction(nameof(Index));
         }

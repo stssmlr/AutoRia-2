@@ -9,6 +9,7 @@ using Data.Entities;
 using Core.Interfaces;
 using Core.Services;
 using AutoRia.SeedExtensions;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +25,7 @@ builder.Services.AddDbContext<CarsDbContext>(options =>
 );
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
-    options.SignIn.RequireConfirmedAccount = false)
+    options.SignIn.RequireConfirmedAccount = true)
     .AddDefaultTokenProviders()
     .AddDefaultUI()
     .AddEntityFrameworkStores<CarsDbContext>();
@@ -50,6 +51,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IRequestService, RequestService>();
 builder.Services.AddScoped<IFilesService, FilesService>();
+builder.Services.AddScoped<IEmailSender, EmailService>();
 
 var app = builder.Build();
 

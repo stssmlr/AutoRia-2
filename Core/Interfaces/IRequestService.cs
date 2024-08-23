@@ -5,6 +5,6 @@ namespace Core.Interfaces
     public interface IRequestService
     {
         List<RequestDto> GetRequests(string userId);
-        void Create(string userId);
+        Task Create(string userId, string userEmail);
     }
 }

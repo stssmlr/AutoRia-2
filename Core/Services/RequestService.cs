@@ -6,6 +6,8 @@ using Data.Data;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Request = Data.Entities.Request;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Core.Services
 {
@@ -14,14 +16,16 @@ namespace Core.Services
         private readonly CarsDbContext context;
         private readonly IMapper mapper;
         private readonly ICartService cartService;
+        private readonly IEmailSender emailSender;
 
-        public RequestService(CarsDbContext context, IMapper mapper, ICartService cartService)
+        public RequestService(CarsDbContext context, IMapper mapper, ICartService cartService, IEmailSender emailSender)
         {
             this.context = context;
             this.mapper = mapper;
             this.cartService = cartService;
+            this.emailSender = emailSender;
         }
-        public void Create(string userId)
+        public async Task Create(string userId, string userEmail)
         {
             // create request
             var newRequest = new Request()
@@ -33,6 +37,8 @@ namespace Core.Services
 
             context.Requests.Add(newRequest);
             context.SaveChanges();
+
+            await emailSender.SendEmailAsync(userEmail, $"New Request #{newRequest.Id}", "<h1>New Request</h1>");
 
             cartService.Clear();
         }
