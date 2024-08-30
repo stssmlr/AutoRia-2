@@ -22,12 +22,13 @@
                         <a asp-action="Remove" asp-route-id="@i.Id" class="btn text-danger">
                             <i class="bi bi-trash3"></i>
                         </a>
-                        <div class="ms-2 me-auto">
-                            <a asp-controller="Requests" asp-action="Create" asp-route-id="@i.Id" class="btn btn-success mt-3">Request Seller</a>
-                        </div>
+                        
                     </li>
                 }
             </ol>
+            <div class="ms-2 me-auto">
+                <a asp-controller="Requests" asp-action="Create" class="btn btn-success mt-3">Request Seller</a>
+            </div>
         }
         else
         {

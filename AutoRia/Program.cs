@@ -25,7 +25,7 @@ builder.Services.AddDbContext<CarsDbContext>(options =>
 );
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
-    options.SignIn.RequireConfirmedAccount = true)
+    options.SignIn.RequireConfirmedAccount = false)
     .AddDefaultTokenProviders()
     .AddDefaultUI()
     .AddEntityFrameworkStores<CarsDbContext>();
@@ -52,6 +52,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IRequestService, RequestService>();
 builder.Services.AddScoped<IFilesService, FilesService>();
 builder.Services.AddScoped<IEmailSender, EmailService>();
+builder.Services.AddScoped<IViewRender, ViewRender>();
 
 var app = builder.Build();
 

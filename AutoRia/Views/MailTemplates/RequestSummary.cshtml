@@ -1,0 +1,19 @@
+﻿@using Core.Models
+@model RequestModel
+
+@{
+    ViewData["Title"] = "RequestSummary";
+    Layout = "~/Views/Shared/_MailLayout.cshtml";
+}
+
+<h1>Order #@Model.RequestNumber Summary</h1>
+<hr />
+<p>User: <span>@Model.UserName</span></p>
+<ul>
+    @foreach (var item in Model.Cars)
+    {
+        <li class="list-group-item">@item.Mark @item.Model @item.Year @item.Price</li>
+    }
+</ul>
+
+@* <p>Total Price: <span>@Model.TotalPrice</span>$</p> *@

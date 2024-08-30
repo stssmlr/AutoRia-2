@@ -1,11 +1,145 @@
 ﻿@model CarDto
 
+
 <div class="text-center">
-    <h1>@Model.Mark @Model.Model</h1>
+    <div class="row">
+        <div class="col-md-5">
+            <h1>@Model.Mark @Model.Model @Model.Year</h1>
+            <hr>
+            <h5 style="text-align:left; margin-top:20px">Mileage: @Model.Mileage</h5>
+            <h2 style="color:green; text-align:left;">Price: @Model.Price$</h2>
+            <p style="color:grey; text-align:left;">@((int)Model.Price * 1)euro | @((int)Model.Price * 40)uah</p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
 
-    <img src="@Model.ImageUrl" height="300" />
+                    <h5 class="card-title" style="text-align:left;">seller.Name</h5>
+                    <p class="card-text" style="text-align:left;">Seller</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-person-check"></i> Registred more than 2 Years</li>
+                    <li class="list-group-item"><i class="bi bi-patch-check"></i> Verificated Phone</li>
+                    <li class="list-group-item"><i class="bi bi-patch-check"></i> Verificated Email</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+            <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary" style="align-self:start; margin-top:20px">Add to Favourite</a>
+            <hr>
+            <img src="https://css.riastatic.com/images/demo/verification-center/lvchi.png" alt="Alternate Text" width="500px"/>
+        </div>
+        <div class="col-md-7">
+            <img src="@Model.ImageUrl" height="500" style="width: 750px" />
+            <div style="margin-top: 40px; border:1px solid red; border-radius: 10px; margin-bottom: 0px; padding-bottom: 0px">
+                <table class="table table-light " >
+                    <tbody>
+                        <tr>
+                            <th scope="row" style="color: midnightblue">Mark</th>
+                            <td>@Model.Mark</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="color: midnightblue">Model</th>
+                            <td>@Model.Model</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="color: midnightblue">Year</th>
+                            <td>@Model.Year</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="color: midnightblue">Mileage</th>
+                            <td>@Model.Mileage</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="color: midnightblue">Price</th>
+                            <td>@Model.Price</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="color: midnightblue">Category</th>
+                            <td>@Model.CategoryId</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="color: midnightblue">Fuel Type</th>
+                            <td>@Model.FuelTypeId</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="color: midnightblue">Quantity</th>
+                            <td>@Model.Quantity</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="color: midnightblue">Discount</th>
+                            <td>@Model.Discount%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+    <hr>
+    <h1>Cars You May Like</h1>
+    <div class="row">
+        <div class="col">
+            <div class="card h-100">
+                <img height="180" src="https://cdn0.riastatic.com/photosnew/auto/photo/audi_q8__530463195f.jpg" class="card-img-top" alt="@Model.Mark">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-controller="Cars" asp-action="Details" asp-route-id="@Model.Id">Audi Q8 2018</a>
+                    </h5>
+                    <p class="card-text">
+                        <span class="price-title">68000$</span> | @Model.Mileage km
+                    </p>
+                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary buttonaddto">Add to Favourite</a>
+                </div>
 
-    <p>Price: @Model.Price$</p>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card h-100">
+                <img height="180" src="https://cdn3.riastatic.com/photosnew/auto/photo/bmw_5-series__539525893f.jpg" class="card-img-top" alt="@Model.Mark">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-controller="Cars" asp-action="Details" asp-route-id="@Model.Id">BMW M5 2017</a>
+                    </h5>
+                    <p class="card-text">
+                        <span class="price-title">55990$</span> | 83000 km
+                    </p>
+                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary buttonaddto">Add to Favourite</a>
+                </div>
 
-    <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Favourite</a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img height="180" src="https://cdn3.riastatic.com/photosnew/auto/photo/toyota__565079374fx.jpg" class="card-img-top" alt="@Model.Mark">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-controller="Cars" asp-action="Details" asp-route-id="@Model.Id">Toyota @Model.Model @Model.Year</a>
+                    </h5>
+                    <p class="card-text">
+                        <span class="price-title">23500$</span> | 230000 km
+                    </p>
+                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary buttonaddto">Add to Favourite</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img height="180" src="https://kyiv-west.lexus.ua/uploads/media/dc_car_gallery/0001/38/07c9cbf975dd545397c2ce4ec4642c80eed5d8dd.jpeg" class="card-img-top" alt="@Model.Mark">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-controller="Cars" asp-action="Details" asp-route-id="@Model.Id">Lexus RX 450h</a>
+                    </h5>
+                    <p class="card-text">
+                        <span class="price-title">@((int)Model.Price)$</span> | @Model.Mileage km
+                    </p>
+                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary buttonaddto">Add to Favourite</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
 </div>

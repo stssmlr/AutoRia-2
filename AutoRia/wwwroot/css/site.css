@@ -1,3 +1,5 @@
+
+
 html {
   font-size: 14px;
 }
@@ -18,7 +20,11 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url("https://www.jesusislife.in/wp-content/uploads/2019/05/Savin-NY-Website-Background-Web.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .admin-product-table img {
@@ -32,14 +38,324 @@ body {
 .btn-primary {
     background-color: #003752;
     border: 0px;
+    font-family: Arial;
+    font-weight: 700;
 }
 
 .btn-outline-primary {
     color: #003752;
     border: 1px solid #003752;
+    font-family: Arial;
+    font-weight: 700;
 }
 
-.home-product-list .card img {
-    object-fit: contain;
-    margin-top: 4px;
+.banner-main{
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
+
+
+
+
+/*--------------------- CAR CARD PARTIAL ---------------------*/
+.home-product-list .card img {
+    
+    margin: 0px;
+    width:305px;
+}
+
+.card-title a{
+    text-decoration: none;
+    color: #005884;
+   
+}
+
+.card-text {
+    margin: 0px;
+
+}
+.price-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: inline; 
+    color: green;
+
+}
+
+.card-text span, .card-text {
+    display: inline;
+
+}
+
+.buttonaddto {
+    margin-top: 15px;
+}
+/*--------------------- REG/LOGIN PAGE ---------------------*/
+.fogpass {
+    margin-top: 40px;
+    margin-left: 50px;
+}
+
+    .fogpass a {
+        text-decoration: none;
+        text-align: center;
+        font-family: Arial;
+        font-weight: 700;
+        color: #005884;
+    }
+
+.regtext {
+    margin-top: 20px;
+    text-align: center;
+    font-family: Arial;
+    font-weight: 700;
+}
+
+    .regtext a {
+        text-decoration: none;
+        font-family: Arial;
+        font-weight: 700;
+        color: #005884;
+    }
+
+.restext {
+    margin-top: 20px;
+    text-align: center;
+}
+
+    .restext a {
+        text-decoration: none;
+        font-family: Arial;
+        font-weight: 700;
+        color: #005884;
+    }
+
+.titlelogin {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: Arial;
+    font-weight: 700;
+    color: #d85542;
+}
+
+.logincard {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 15px 0px;
+    font-family: Arial;
+    font-weight: 700;
+}
+
+.phonehelp {
+    margin-top: 70px;
+    font-family: Arial;
+    font-weight: 700;
+}
+
+    .phonehelp a {
+        text-decoration: none;
+        font-family: Arial;
+        font-weight: 700;
+        color: #005884;
+    }
+
+#login-submit {
+    background-color: #d85542;
+    border: none;
+}
+
+.autoriatitle {
+    color: #d85542;
+}
+/*------------------------- FOOTER ----------------------*/
+footer {
+    margin-top: 30px;
+}
+
+.footer-section {
+    background: #f7cac5;
+    position: relative;
+}
+
+.footer-cta {
+    border-bottom: 1px solid #373636;
+}
+
+.single-cta i {
+    color: gh;
+    font-size: 30px;
+    float: left;
+    margin-top: 8px;
+}
+
+.cta-text {
+    padding-left: 15px;
+    display: inline-block;
+}
+
+    .cta-text h4 {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .cta-text span {
+        color: white;
+        font-size: 15px;
+    }
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+}
+
+.footer-pattern img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 330px;
+    background-size: cover;
+    background-position: 100% 100%;
+}
+
+.footer-logo {
+    margin-bottom: 30px;
+}
+
+    .footer-logo img {
+        max-width: 200px;
+    }
+
+.footer-text p {
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: white;
+    line-height: 28px;
+}
+
+.footer-social-icon span {
+    color: #fff;
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+}
+
+.footer-social-icon a {
+    color: #fff;
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+.footer-social-icon i {
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+}
+
+
+
+.footer-widget-heading h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+    .footer-widget-heading h3::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -15px;
+        height: 2px;
+        width: 50px;
+        background: #d95343;
+    }
+
+.footer-widget ul li {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    margin-bottom: 12px;
+}
+
+    .footer-widget ul li a:hover {
+        color: #d95343;
+    }
+
+    .footer-widget ul li a {
+        color: #878787;
+        text-transform: capitalize;
+    }
+
+.subscribe-form {
+    position: relative;
+    overflow: hidden;
+}
+
+    .subscribe-form input {
+        width: 100%;
+        padding: 14px 28px;
+        background: #2E2E2E;
+        border: 1px solid #2E2E2E;
+        color: #fff;
+    }
+
+    .subscribe-form button {
+        position: absolute;
+        right: 0;
+        background: #d95343;
+        padding: 13px 20px;
+        border: 1px solid #d95343;
+        top: 0;
+    }
+
+        .subscribe-form button i {
+            color: #fff;
+            font-size: 22px;
+            transform: rotate(-6deg);
+        }
+
+.copyright-area {
+    background: fff;
+    padding: 25px 0;
+}
+
+.copyright-text p {
+    margin: 0;
+    font-size: 14px;
+    color: #878787;
+}
+
+    .copyright-text p a {
+        color: #d95343;
+    }
+
+.footer-menu li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+    .footer-menu li:hover a {
+        color: #d95343;
+    }
+
+    .footer-menu li a {
+        font-size: 14px;
+        color: green;
+    }
+
+
+.progress {
+    margin-bottom: 20px;
+
+}
+
+.text-bg-warning{
+    color: white;
+}
+

@@ -1,6 +1,28 @@
 ﻿@model List<Car>
 
-<div class="text-center">
+<div class="banner-main row">
+    <div class="col-md-8">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://i.ytimg.com/vi/ipls3wCfe3A/maxresdefault.jpg" class="d-block w-100" alt="..." height="400px">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.ytimg.com/vi/ZfGRBpnn9ak/maxresdefault.jpg" class="d-block w-100" alt="..." height="400px">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.ytimg.com/vi/iAk2E0a42GU/maxresdefault.jpg" class="d-block w-100" alt="..." height="400px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <img src="https://css.riastatic.com/images/brk/vc-300x250.avif" class="d-block w-100" alt="..." height="400px">
+    </div>
+</div>
+
+
+<div class="text-center"> 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 home-product-list">
         @foreach (var i in Model)
         {
@@ -8,3 +30,40 @@
         }
     </div>
 </div>
+
+<hr>
+<div class="text-center">
+    <h3 style="color:lightcoral">Auto.Ria Rating</h3>
+    <h5 style="color:gold">5 <i class="bi bi-star-fill"></i></h5>
+    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar text-bg-warning" style="width: 98%"></div>
+    </div>
+    <h5 style="color:gold">4 <i class="bi bi-star-fill"></i></h5>
+    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar text-bg-warning" style="width: 10%"></div>
+    </div>
+    <h5 style="color:gold">3 <i class="bi bi-star-fill"></i></h5>
+    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar text-bg-warning" style="width: 0%"></div>
+    </div>
+    <h5 style="color:gold">2 <i class="bi bi-star-fill"></i></h5>
+    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar text-bg-warning" style="width: 0%"></div>
+    </div>
+    <h5 style="color:gold">1 <i class="bi bi-star-fill"></i></h5>
+    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar text-bg-warning" style="width: 0%"></div>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <img src="https://img6.auto.ria.com/images/journal/news192/images/ios_1.jpg" alt="Alternate Text" / height="430px">
+    </div>
+    <div class="col-md-6">
+        <img src="https://scontent.frwn2-1.fna.fbcdn.net/v/t39.30808-6/456540840_1753277928410667_2987008627368720173_n.png?_nc_cat=104&ccb=1-7&_nc_sid=0b6b33&_nc_ohc=7J7AKUdRUfAQ7kNvgEYwmbD&_nc_ht=scontent.frwn2-1.fna&oh=00_AYDkcotbtrJ7zpxaExp8_20p3_WXf1BS67HxsfSKrs3-yQ&oe=66D7D322" alt="Alternate Text" height="330px"/>
+    </div>
+</div>
+
+

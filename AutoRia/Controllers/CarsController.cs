@@ -159,7 +159,7 @@ namespace AutoRia.Controllers
             return RedirectToAction("Index");
         }
 
-        // -+-+-+-+-+-+-+-+-+-+-+-+- DEATILS -+-+-+-+-+-+-+-+-+-+-+-+-
+        // -+-+-+-+-+-+-+-+-+-+-+-+- DETAILS -+-+-+-+-+-+-+-+-+-+-+-+-
         [AllowAnonymous]
         public IActionResult Details(int id)
         {
