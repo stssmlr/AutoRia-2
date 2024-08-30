@@ -1,0 +1,47 @@
+﻿@model List<CarDto>;
+
+<div class="card text-center">
+    <div class="card-header">
+        My Favourite Cars
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Favourite Cars List</h5>
+
+        @if (Model.Any())
+        {
+            <ol class="list-group list-group-numbered">
+                @foreach (var i in Model)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <img class="ms-2" height="48" src="@i.ImageUrl" alt="@i.Mark" />
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold text-start">@i.Mark</div>
+                            @i.CategoryName | Stock: @i.Quantity
+                        </div>
+                        <span style="background-color: #0d6efd" class="badge text-bg-primary">@i.Price$</span>
+                        <a asp-action="Remove" asp-route-id="@i.Id" class="btn text-danger">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                        <div class="ms-2 me-auto">
+                            <a asp-controller="Requests" asp-action="Create" asp-route-id="@i.Id" class="btn btn-success mt-3">Request Seller</a>
+                        </div>
+                    </li>
+                }
+            </ol>
+        }
+        else
+        {
+            <p class="mt-4">Looks like your cart is empty</p>
+            <div>
+                <a asp-controller="Home" class="btn btn-primary mt-3">
+                    Browse Our Store
+                </a>
+            </div>
+        }
+
+        
+    </div>
+    <div class="card-footer text-body-secondary">
+        Total: @Model.Sum(x => x.Price)$
+    </div>
+</div>
